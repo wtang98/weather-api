@@ -1,0 +1,18 @@
+.result{
+    border: 1px solid red;
+    width: 70vw;
+    height: 35vh;
+    border-radius: 15px;
+    &__info{
+        display: flex;
+        flex-direction: row;
+        &-left{
+            border: 1px solid blue;
+            width: 50%;
+        }
+        &-right{
+            border: 1px solid red;
+            width: 50%;
+        }
+    }
+}
