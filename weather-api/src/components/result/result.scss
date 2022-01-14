@@ -1,18 +1,31 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
 .result{
-    border: 1px solid red;
-    width: 70vw;
-    height: 35vh;
     border-radius: 15px;
     &__info{
         display: flex;
         flex-direction: row;
         &-left{
+            padding: 10px;
+            border-radius: 15px;
             border: 1px solid blue;
-            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25vw;
         }
         &-right{
+            padding: 10px;
+            border-radius: 15px;
             border: 1px solid red;
-            width: 50%;
+            width: 45vw;
+            &-bottom{
+                display: flex;
+            }
         }
     }
 }

@@ -3,45 +3,40 @@ import './home.scss'
 import Result from '../components/result/result'
 
 const Home = () => {
-    const [weatherData, setWeatherData] = useState({})
-    const [location, setLocation] = useState("")
-	let place = 'london';
+    const [weatherData, setWeatherData] = useState(false)
+    const [latitude, setLatitude] = useState('')
+    const [longitude, setLongitude] = useState('')
+    const [location, setLocation] = useState(latitude,longitude)
+    const [loading, setLoading] = useState(true)
+    console.log(location)
     
-    
-    // const any = () => {
-    //     if("geoloaction" in navigator){
-    //         navigator.geolocation.getCurrentPosition((position) => {
-    //             setLocation(position.coords.latitude, position.coords.longitude);
-    //         })
-    //     }else{
-    //         setLocation('London')
-    //     }
-    // }
+
     useEffect(() => {
-        if("geoloaction" in navigator){
+        if('geolocation' in navigator){
             navigator.geolocation.getCurrentPosition((position) => {
-                console.log(position.coords.latitude, position.coords.longitude);
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
             })
         }else{
             console.log('location not found')
             setLocation('London')
         }
     },[])
-    // console.log(location)
+    console.log(latitude,longitude)
 
 	useEffect(() => {
-		fetch(`https://api.weatherapi.com/v1/current.json?key=a97287063e5247b88a4123535221301&q=${place}&aqi=yes`)
+		fetch(`https://api.weatherapi.com/v1/forecast.json?key=a97287063e5247b88a4123535221301&q=${latitude},${longitude}&days=10&aqi=yes&alerts=yes`)
             .then(response => response.json())
             .then(data =>  setWeatherData(data))
             .catch(error => console.log(error))
-	}, [])
+	}, [latitude,longitude])
 
     // console.log(weatherData)
     return (
         <div className='home'>
         <h1>Weather Forecast</h1>
-            {JSON.stringify(weatherData)}
-            <Result weatherData={weatherData}/>  
+            {/* {JSON.stringify(weatherData)} */}
+            {weatherData != false ? <Result weatherData={weatherData}/> : "loading..." }
         </div>
     )
 }
