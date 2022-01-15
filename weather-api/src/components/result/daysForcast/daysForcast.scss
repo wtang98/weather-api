@@ -1,15 +1,16 @@
 .forcast{
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     margin: 3px;
-    &__icon{
+    // &__icon{
 
-    }
+    // }
     &__dayOfWeek{
-
+        margin-top: -10px;
     }
-    &__temp{
+    // &__temp{
 
-    }
+    // }
 }

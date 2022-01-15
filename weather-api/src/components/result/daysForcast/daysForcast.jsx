@@ -11,7 +11,7 @@ const DaysForcast = ({icon, dayOfWeek, temp}) => {
                 <p>{dayOfWeek}</p>
             </div>
             <div className="forcast__temp">
-                <p>{temp}</p>
+                <p>{temp}°</p>
             </div>
         </div>
     )
