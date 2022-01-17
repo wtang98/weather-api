@@ -1,4 +1,4 @@
-@import '../assets.scss';
+@import '../assets/assets.scss';
 
 *{
     margin: 0;
@@ -11,8 +11,33 @@
     height: 100%;
     display: flex;
     align-items: center;
+    background-position: center;
     flex-direction: column;
+    min-height: 100vh;
+    background-size: cover;
+
+    background-size: cover;
+
+    background-size: cover;
+
+    background-size: cover;
     &>h1{
         margin-bottom: 10px;
     }
+}
+
+.rainy{
+    background-image: url('../assets/media/rainy.gif');
+}
+.cloudy{
+    background-image: url('../assets/media/cloudy.gif');
+}
+.clear{
+    background-image: url('../assets/media/clear.gif');
+}
+.sunny{
+    background-image: url('../assets/media/sunny.gif');
+}
+.fog{
+    background-image: url('../assets/media/fog.gif');
 }

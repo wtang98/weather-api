@@ -8,103 +8,79 @@ const weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Sa
 const month = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const Result = ({weatherData}) => {
-    const [uvStrength, setUvStrength] = useState('')
-    const [windDirection, setWindDirection] = useState('')
-    const [airQuality, setAirQuality] = useState('')
-    const [greeting, setGreeting] = useState('Hello')
     
-    const date = new Date()
-    const hours = date.getHours();
-    
+    let greeting = 'Hello!';
+    let airQuality = '';
+    let uvRating = '';
+    let windDirection = ''
     const currentData = weatherData?.current;
     const foreCast = weatherData?.forecast;
     
-    useEffect(() => {
-        switch(hours){
-            case 6,7,8,9,10,11:
-                setGreeting('Good Morning!')
-            break;
-            case 12:
-                setGreeting('Its noon!')
-            break;
-            case 13,14,15,16,17,18:
-                setGreeting('Good Afternoon!')
-            break;
-            case 19,20,21,22,23,24,0,1,2,3,4,5:
-                setGreeting('Good Evening!')
-        }
-    },[])
+    const date = new Date()
+    const hours = date.getHours();
+    if(5 <= hours && hours < 12){
+        greeting='Good Morning!'
+    }else if(hours == 12){
+        greeting='Its noon!'
+    }else if(12 <= hours && hours < 19){
+        greeting='Good Afternoon!'
+    }else if(19 <= hours && hours <= 24 && hours < 5){
+        greeting='Good Evening!'
+    }
 
-    useEffect(()=> {
-        switch(parseInt(currentData?.uv)){
-            case 1,2:
-                setUvStrength('Low');
-            break;
-            case 3,4,5:
-                setUvStrength('Moderate');
-            break;
-            case 6,7:
-                setUvStrength('High');
-            break;
-            case 8,9,10:
-                setUvStrength('Very High');
-            break;
-            case 11:
-                setUvStrength('Extreme');
-            break;
-        }
-    },[currentData?.uv])
+    const aQIndex = parseInt(currentData?.air_quality['gb-defra-index']);
+    if(0 < aQIndex <= 3){
+        airQuality = 'Low'
+    }else if(3 < aQIndex <= 6){
+        airQuality = 'Moderate'
+    }else if(6 < aQIndex <= 9){
+        airQuality = 'High'
+    }else if(9 < aQIndex){
+        airQuality = 'Very High'
+    }
 
-    useEffect(()=> {
-        switch(currentData?.wind_dir){
-            case 'S':
-                setWindDirection('South');
-            break;
-            case 'W':
-                setWindDirection('West');
-            break;
-            case 'E':
-                setWindDirection('East');
-            break;
-            case 'N':
-                setWindDirection('North');
-            break;
-            case 'NE':
-                setWindDirection('North East');
-            break;
-            case 'NW':
-                setWindDirection('North West');
-            break;
-            case 'SE':
-                setWindDirection('South East');
-            break;
-            case 'SW':
-                setWindDirection('South West');
-            break;
-        }
-    },[currentData?.wind_dir])
+    const uvIndex = currentData?.uv
+    if(uvIndex < 3){
+        uvRating = 'Low'
+    }else if(3 <= uvIndex < 6){
+        uvRating = 'Moderate'
+    }else if(6 <= uvIndex < 8){
+        uvRating = 'High'
+    }else if(8 <= uvIndex < 11){
+        uvRating = 'Very High'
+    }else{
+        uvRating = 'Extreme'
+    }
 
-    useEffect(()=> {
-        switch(parseInt(currentData?.air_quality['gb-defra-index'])){
-            case 1,2,3:
-                setAirQuality('Low')
-            break;
-            case 4,5,6:
-                setAirQuality('Moderate')
-            break;
-            case 7,8,9:
-                setAirQuality('High')
-            break;
-            case 10:
-                setAirQuality('Very High')
-            break;
-        }
-    },[currentData?.air_quality['gb-defra-index']])
+    const windDir = currentData?.wind_dir
+    if(windDir == 'S'){
+        windDirection = 'South'
+    }
+    if(windDir == 'W'){
+        windDirection = 'West'
+    }
+    if(windDir == 'N'){
+        windDirection = 'North'
+    }
+    if(windDir == 'E'){
+        windDirection = 'East'
+    }
+    if(windDir == 'SW'){
+        windDirection = 'South West'
+    }
+    if(windDir == 'SE'){
+        windDirection = 'South East'
+    }
+    if(windDir == 'NW'){
+        windDirection = 'North West'
+    }
+    if(windDir == 'NE'){
+        windDirection = 'North East'
+    }
 
-    
     return (
         <>
-            {currentData?.feelslike_c == undefined ? (
+            {currentData?.feelslike_c == undefined ?(
                 <div className="loadingScreen">
                     loading...
                 </div>
@@ -114,16 +90,16 @@ const Result = ({weatherData}) => {
                 <div className='result__info'>
                     <div className='result__info-left'>
                         <div className='result__info-left-top'>
-                            <h2 className='dayOfWeek'>{weekday[date.getDay()]}</h2>
-                            <h5 className='monthDay'>{`${date.getDate()}th ${month[date.getMonth()]}`}</h5>
+                            <h1 className='dayOfWeek'>{weekday[date.getDay()]}</h1>
+                            <h4 className='monthDay'>{`${date.getDate()}th ${month[date.getMonth()]}`}</h4>
                             <div className='result__info-left-top-location'>
-                                <h5>{weatherData?.location?.region}</h5>
-                                <h5>{weatherData?.location?.country}</h5>
+                                <h4>{weatherData?.location?.region}</h4>
+                                <h4>{weatherData?.location?.country}</h4>
                             </div>
                         </div>
                         <div className='result__info-left-bottom'>
-                            <h3 className='temp'>{`${currentData?.temp_c}°C`}</h3>
-                            <h5 className='desc'>{currentData?.condition.text}</h5>
+                            <h1 className='temp'>{`${currentData?.temp_c}°C`}</h1>
+                            <h2 className='desc'>{currentData?.condition.text}</h2>
                             {/* <img src={currentData?.condition.icon} alt='' /> */}
                         </div>
                     </div>
@@ -133,7 +109,7 @@ const Result = ({weatherData}) => {
                             <WeatherDetails keyWord='Wind' value={`${currentData?.wind_kph} km/h`}/>
                             <WeatherDetails keyWord='Wind Direction' value={`${windDirection}`}/>
                             <WeatherDetails keyWord='Humidity' value={`${currentData?.humidity} %`}/>
-                            <WeatherDetails keyWord='Ultra Violet light strength' value={`${currentData?.uv} ${uvStrength}`}/>
+                            <WeatherDetails keyWord='Ultra Violet light strength' value={`${currentData?.uv} ${uvRating}`}/>
                             <WeatherDetails keyWord='Rainfall' value={`${currentData?.precip_mm} mm`}/>
                             <WeatherDetails keyWord='Air Pollution Index' value={`${currentData?.air_quality['gb-defra-index']} ${airQuality}`}/>
                         </div>

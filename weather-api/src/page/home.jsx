@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import './home.scss'
 import Result from '../components/result/result'
-import Chart from '../components/chart/chart'
+import MyCharts from '../components/chart/hourlyChart'
 
 const Home = () => {
     const [weatherData, setWeatherData] = useState(false)
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
     const [location, setLocation] = useState(latitude,longitude)
-    console.log(location)
+    const [background, setBackground] = useState('')
     
     //fetching Data
     useEffect(() => {
@@ -18,11 +18,10 @@ const Home = () => {
                 setLongitude(position.coords.longitude);
             })
         }else{
-            console.log('location not found')
+            alert('location not found')
             setLocation('London')
         }
     },[])
-    console.log(latitude,longitude)
 
 	useEffect(() => {
 		fetch(`http://api.weatherapi.com/v1/forecast.json?key=a97287063e5247b88a4123535221301&q=${latitude} ${longitude}&days=10&aqi=yes&alerts=yes`)
@@ -31,57 +30,35 @@ const Home = () => {
             .catch(error => console.log(error))
 	}, [latitude,longitude])
 
-
-    //Setting Chart Data
-    let times = [];
-    let temps = [];
-    const [xData, setXData] = useState();
-    const [yData, setyData] = useState([]);
-
-    const chartData = {
-        labels: xData,
-        datasets: [
-            {
-                label: '',
-                data: yData,
-                fill: true,
-                backgroundColor: "black",
-                borderColor:"#5ac53b",
-                borderWidth:2,
-                pointBorderColor: "rgba(0,0,0,0)",
-                pointBackgroundColor: "rgba(0,0,0,0)",
-                pointHoverBackgroundColor: "#5ac53b",
-                pointHoverBorderColor:"#000000",
-                pointHoverBorderWidth:4,
-                pointHoverRadius:6,
-            },
-        ],
+    let condition = weatherData?.current?.condition?.text;
+    const loadBackground = () => {
+        if(condition === 'Sunny'){
+            setBackground('sunny')
+        }
+        if(condition === 'Rainy'){
+            setBackground('rainy')
+        }
+        if(condition === 'Clear'){
+            setBackground('clear')
+        }
+        if(condition === ''){
+            setBackground('rainy')
+        }
+        if(condition === 'Fog'){
+            setBackground('fog')
+        }
     }
+    useEffect(loadBackground, [condition])
+    console.log(background)
 
-    useEffect(() => {
-        for(let i = 0; i<24 ;i++){
-            times.push(`${i}:00`)
-        }
-    },[])
-    setXData(times)
-
-    useEffect(() => {
-        for(let i = 0; i<weatherData?.forecast?.forecastday[0]?.hour[i].length;i++){
-            temps.push(weatherData?.forecast?.forecastday[0]?.hour[i].temp_c);
-        }
-    },[])
-    setyData(temps)
-
-
-    console.log(weatherData?.forecast?.forecastday[0]?.hour[18].temp_c,'ss')
-    // console.log(weatherData)
     return (
-        <div className='home'>
-            <h1>Weather Forecast</h1>
-            {/* {JSON.stringify(weatherData)} */}
-            <Result weatherData={weatherData}/>
-            {/* <Chart weatherData={weatherData}/> */}
-        </div>
+        <>
+            {background != undefined && <div className={`home ${background}`}>
+                <h1>Weather Forecast</h1>
+                <Result weatherData={weatherData}/>
+                <MyCharts weatherData={weatherData}/>
+            </div>}
+        </>
     )
 }
 
