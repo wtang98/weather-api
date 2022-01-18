@@ -1,0 +1,11 @@
+.container{
+    border: solid 1px red;
+    display: flex;
+    flex-direction: row;
+    &__map{
+        &>Map{
+            width: 60vw;
+            height: 60vh;
+        }
+    }
+}

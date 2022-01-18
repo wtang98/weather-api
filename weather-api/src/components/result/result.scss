@@ -10,13 +10,15 @@
     color: white;
         font-family: inherit;
         &__info{
-        color: white;
+        color: rgb(28, 28, 28);
         // background-color:  rgba(0, 0, 0, 0.837);
         font-family: inherit;
         border-radius: 15px;
         display: flex;
         flex-direction: row;
         &-left{
+            background-position: center;
+            background-size: cover;
             padding: 10px;
             font-family: inherit;
             // background-color:  rgb(1, 1, 55);
@@ -30,6 +32,7 @@
             }
         }
         &-right{
+            color: white;
             font-family: inherit;
             padding: 10px;
             border-radius: 15px;

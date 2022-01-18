@@ -84,34 +84,32 @@ const Result = ({weatherData}) => {
         },1000)
     }, [])
 
-    let condition = weatherData?.current?.condition?.text;
+    // let condition = weatherData?.current?.condition?.text;
+    const condition = 'Sunny'
     const loadBackground = () => {
         if(condition === 'Sunny'){
             setBackground('sunny')
+        }else if(condition === 'Cloudy' || 'Overcast' ||'Partly cloudy'){
+            setBackground('cloudy')
         }else if(condition === 'Clear'){
             setBackground('clear')
-        }else if(condition === 'Rain'){
-            setBackground('rainy')
         }else if(condition === 'Fog'|| 'Freezing Fog'|| 'Mist'){
             setBackground('fog')
-        }else if(condition === 'Cloudy' || 'Overcast'){
-            setBackground('cloudy')
         }else if(condition === 'Patchy light rain with thunder' || 'Moderate or heavy rain with thunder' || 'Patchy light snow with thunder' 
         || 'Moderate or heavy snow with thunder'){
             setBackground('thunder')
         }else if(condition === 'Light snow' || 'Patchy snow possible' || 'Patchy light snow' 
         || 'Patchy moderate snow' || 'Moderate snow' || 'Patchy heavy snow' || 'Heavy snow'){
             setBackground('snow')
-        }else if(condition === 'Rainy' || 'Patchy rain possible' || 'Patchy light drizzle'|| 'Light drizzle'
-        || 'Patchy light rain', 'Light rain' || 'Moderate rain at times' || 'Moderate rain' 
-        || 'Heavy rain at times' || 'Heavy rain' || 'Light freezing rain' || 'Moderate or heavy freezing rain' 
-        || 'Light rain shower' || 'Moderate or heavy rain shower' || 'Torrential rain shower'){
+        }else if(condition === 'Rain'|| 'Rainy','Patchy rain possible'||'Patchy light drizzle'||'Light drizzle'
+            ||'Patchy light rain'|| 'Light rain'||'Moderate rain at times'||'Moderate rain' 
+            ||'Heavy rain at times'||'Heavy rain'||'Light freezing rain'||'Moderate or heavy freezing rain' 
+            ||'Light rain shower'||'Moderate or heavy rain shower'||'Torrential rain shower'){
             setBackground('rainy')
         }
     }
     useEffect(loadBackground, [condition])
     
-
     return (
         <>
             {currentData?.feelslike_c == undefined ?(
@@ -144,10 +142,10 @@ const Result = ({weatherData}) => {
                     </div>}
                     <div className='result__info-right'>
                         <div className='result__info-right-top'> 
-                            <WeatherDetails keyWord='Feels Like' value={`${currentData?.feelslike_c} °C`}/>
+                            <WeatherDetails keyWord='Feels Like' value={`${currentData?.feelslike_c}°C`}/>
                             <WeatherDetails keyWord='Wind' value={`${currentData?.wind_kph} km/h`}/>
                             <WeatherDetails keyWord='Wind Direction' value={`${direction}`}/>
-                            <WeatherDetails keyWord='Humidity' value={`${currentData?.humidity} %`}/>
+                            <WeatherDetails keyWord='Humidity' value={`${currentData?.humidity}%`}/>
                             <WeatherDetails keyWord='Ultra Violet light strength' value={`${currentData?.uv} ${uvRating}`}/>
                             <WeatherDetails keyWord='Rainfall' value={`${currentData?.precip_mm} mm`}/>
                             <WeatherDetails keyWord='Air Pollution Index' value={`${currentData?.air_quality['gb-defra-index']} ${airQuality}`}/>
