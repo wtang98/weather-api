@@ -1,4 +1,4 @@
-
+@import '../../assets/assets.scss';
 *{
     margin: 0;
     padding: 0;
@@ -6,28 +6,62 @@
 
 .result{
     border-radius: 15px;
-    &__info{
+    width: 100%;
+    color: white;
+        font-family: inherit;
+        &__info{
+        color: white;
+        // background-color:  rgba(0, 0, 0, 0.837);
+        font-family: inherit;
+        border-radius: 15px;
         display: flex;
         flex-direction: row;
-        width: 72vw;
         &-left{
             padding: 10px;
+            font-family: inherit;
+            // background-color:  rgb(1, 1, 55);
             border-radius: 15px;
-            border: 1px solid blue;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             flex: 1;
+            &-bottom{
+                display: flex;
+            }
         }
         &-right{
+            font-family: inherit;
             padding: 10px;
             border-radius: 15px;
-            border: 1px solid red;
             flex: 2;
             &-bottom{
+                font-family: inherit;
                 display: flex;
                 justify-content: space-between;
             }
         }
     }
+}
+
+
+.rainy{
+    background-image: url('../../assets/media/rainy.gif');
+}
+.cloudy{
+    background-image: url('../../assets/media/cloudy.gif');
+}
+.clear{
+    background-image: url('../../assets/media/clear.gif');
+}
+.sunny{
+    background-image: url('../../assets/media/sunny.gif');
+}
+.fog{
+    background-image: url('../../assets/media/fog.gif');
+}
+.snow{
+    background-image: url('../../assets/media/snow.gif');
+}
+.thunder{
+    background-image: url('../../assets/media/thunder.gif');
 }

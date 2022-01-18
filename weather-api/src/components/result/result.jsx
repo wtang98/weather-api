@@ -8,6 +8,8 @@ const weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Sa
 const month = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const Result = ({weatherData}) => {
+    const [clockState, setClockState] = useState();
+    const [background, setBackground] = useState(undefined)
     
     let greeting = 'Hello!';
     let airQuality = '';
@@ -18,6 +20,9 @@ const Result = ({weatherData}) => {
     
     const date = new Date()
     const hours = date.getHours();
+    const day = date.getDate();
+    const monthOfYear = month[date.getMonth()]
+    
     if(5 <= hours && hours < 12){
         greeting='Good Morning!'
     }else if(hours == 12){
@@ -53,30 +58,59 @@ const Result = ({weatherData}) => {
     }
 
     const windDir = currentData?.wind_dir
-    if(windDir == 'S'){
-        windDirection = 'South'
+    
+    let arrOfDiretions = '';
+    let direction = ''
+    if(windDir != undefined){
+        arrOfDiretions = windDir.split('')
+        for(let i = 0; i< arrOfDiretions.length;i++){
+            if(arrOfDiretions[i]== 'S'){
+                arrOfDiretions[i] = 'South'
+            }else if(arrOfDiretions[i]=='W'){
+                arrOfDiretions[i] = 'West'
+            }else if(arrOfDiretions[i]=='N'){
+                arrOfDiretions[i] = 'North'
+            }else if(arrOfDiretions[i]=='E'){
+                arrOfDiretions[i] = 'East'
+            }
+        }
+    direction = arrOfDiretions.join(' ')
     }
-    if(windDir == 'W'){
-        windDirection = 'West'
+
+    useEffect(() => {
+        setInterval(() => {
+            const datee = new Date()
+            setClockState(datee.toLocaleTimeString())
+        },1000)
+    }, [])
+
+    let condition = weatherData?.current?.condition?.text;
+    const loadBackground = () => {
+        if(condition === 'Sunny'){
+            setBackground('sunny')
+        }else if(condition === 'Clear'){
+            setBackground('clear')
+        }else if(condition === 'Rain'){
+            setBackground('rainy')
+        }else if(condition === 'Fog'|| 'Freezing Fog'|| 'Mist'){
+            setBackground('fog')
+        }else if(condition === 'Cloudy' || 'Overcast'){
+            setBackground('cloudy')
+        }else if(condition === 'Patchy light rain with thunder' || 'Moderate or heavy rain with thunder' || 'Patchy light snow with thunder' 
+        || 'Moderate or heavy snow with thunder'){
+            setBackground('thunder')
+        }else if(condition === 'Light snow' || 'Patchy snow possible' || 'Patchy light snow' 
+        || 'Patchy moderate snow' || 'Moderate snow' || 'Patchy heavy snow' || 'Heavy snow'){
+            setBackground('snow')
+        }else if(condition === 'Rainy' || 'Patchy rain possible' || 'Patchy light drizzle'|| 'Light drizzle'
+        || 'Patchy light rain', 'Light rain' || 'Moderate rain at times' || 'Moderate rain' 
+        || 'Heavy rain at times' || 'Heavy rain' || 'Light freezing rain' || 'Moderate or heavy freezing rain' 
+        || 'Light rain shower' || 'Moderate or heavy rain shower' || 'Torrential rain shower'){
+            setBackground('rainy')
+        }
     }
-    if(windDir == 'N'){
-        windDirection = 'North'
-    }
-    if(windDir == 'E'){
-        windDirection = 'East'
-    }
-    if(windDir == 'SW'){
-        windDirection = 'South West'
-    }
-    if(windDir == 'SE'){
-        windDirection = 'South East'
-    }
-    if(windDir == 'NW'){
-        windDirection = 'North West'
-    }
-    if(windDir == 'NE'){
-        windDirection = 'North East'
-    }
+    useEffect(loadBackground, [condition])
+    
 
     return (
         <>
@@ -86,28 +120,33 @@ const Result = ({weatherData}) => {
                 </div>
             ):(
             <div className='result'>
+                <h2>{date.getHours() < 12? `${clockState}am`: `${clockState}pm`}</h2>
                 <h2>{greeting} Here is the weather were you are</h2>
                 <div className='result__info'>
-                    <div className='result__info-left'>
+                    {background != undefined && <div className={`result__info-left ${background}`}>
                         <div className='result__info-left-top'>
                             <h1 className='dayOfWeek'>{weekday[date.getDay()]}</h1>
-                            <h4 className='monthDay'>{`${date.getDate()}th ${month[date.getMonth()]}`}</h4>
+                            <h4 className='monthDay'>{day == 1 ? `${day}st ${monthOfYear}`: day == 2?`${day}nd ${monthOfYear}`: day == 3?`${day}rd ${monthOfYear}` : `${day}th ${monthOfYear}`}</h4>
                             <div className='result__info-left-top-location'>
                                 <h4>{weatherData?.location?.region}</h4>
                                 <h4>{weatherData?.location?.country}</h4>
                             </div>
                         </div>
                         <div className='result__info-left-bottom'>
-                            <h1 className='temp'>{`${currentData?.temp_c}°C`}</h1>
-                            <h2 className='desc'>{currentData?.condition.text}</h2>
-                            {/* <img src={currentData?.condition.icon} alt='' /> */}
+                            <div className="result__info-left-bottom-left">
+                                <h1 className='temp'>{`${currentData?.temp_c}°C`}</h1>
+                                <h2 className='desc'>{currentData?.condition.text}</h2>
+                            </div>
+                            <div className='result__info-left-bottom-right'>
+                                <img src={currentData?.condition.icon} alt='' />
+                            </div>
                         </div>
-                    </div>
+                    </div>}
                     <div className='result__info-right'>
                         <div className='result__info-right-top'> 
                             <WeatherDetails keyWord='Feels Like' value={`${currentData?.feelslike_c} °C`}/>
                             <WeatherDetails keyWord='Wind' value={`${currentData?.wind_kph} km/h`}/>
-                            <WeatherDetails keyWord='Wind Direction' value={`${windDirection}`}/>
+                            <WeatherDetails keyWord='Wind Direction' value={`${direction}`}/>
                             <WeatherDetails keyWord='Humidity' value={`${currentData?.humidity} %`}/>
                             <WeatherDetails keyWord='Ultra Violet light strength' value={`${currentData?.uv} ${uvRating}`}/>
                             <WeatherDetails keyWord='Rainfall' value={`${currentData?.precip_mm} mm`}/>

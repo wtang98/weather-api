@@ -16,46 +16,33 @@ const MyCharts = ({weatherData}) => {
     const [feelsLikeData, setFeelsLikeData] = useState([])
     const [rainfallData, setRainfallData] = useState([])
 
-    let times = [];
-    let temps = [];
-    let feelsLike = [];
-    let rainFall = [];
-    
+
     let chartData = {
         labels: timesData,
         datasets: [
             {
                 label: 'Temperature',
                 data: tempData,
-                fill: true,
                 borderColor:"darkblue",
-                borderWidth:3,
-                pointRadius:0,
-                // pointBorderColor: "rgba(0,0,0,0)",
-                // pointBackgroundColor: "rgba(0,0,0,0)",
-                // pointHoverBackgroundColor: "#5ac53b",
-                // pointHoverBorderColor:"#000000",
-                // pointHoverBorderWidth:4,
-                // pointHoverRadius:3,
-            },{
+            },
+            {
                 label: 'Feels Like',
                 data: feelsLikeData,
-                fill: true,
                 borderColor:"grey",
-                borderWidth:3,
-                pointRadius:0,
-            },{
+            },
+            {
                 label: 'Rain Fall',
-                data: rainFall,
-                fill: true,
+                data: rainfallData,
                 borderColor:"blue",
-                borderWidth:3,
-                pointRadius:0,
             }
         ],
     }
     
     const loadChartData = () => {
+        let times = [];
+        let temps = [];
+        let feelsLike = [];
+        let rainFall = [];
         for(let i = 0; i<24 ;i++){
             if(i<12){
                 if(i<10){
@@ -75,28 +62,40 @@ const MyCharts = ({weatherData}) => {
         setFeelsLikeData(feelsLike)
         setRainfallData(rainFall)
     }
+    const options = {
+        display:true,
+        responsive: true,
+        maintainAspectRatio: true,
+        title:{
+            display: true,
+            text: 'Temperature through the day'
+        },
+        legend: {
+            labels: {
+                fontSize: 26
+            }
+        }
+    }
 
     useEffect(loadChartData,[weatherData?.forecast?.forecastday[0]?.hour[0].temp_c])
     return (
+        <>
         <div className='chart'>
             {weatherData?.forecast?.forecastday[0]?.hour[0].temp_c == undefined ? (
                 <div>loading...</div>
+            
             ):(
-            <Line 
-                data={weatherData?.forecast?.forecastday[0]?.hour[0].temp_c == undefined ? null : chartData}
-                options = {{
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        title:{
-                            display: true,
-                            text: 'Temperature through the day'
-                        },
-                        legend: true // Hide legend
-                    },
-                }}
-            />)}
+                <div className='chart__container'>
+                    <h2>Temperature through the day</h2>
+                    <Line 
+                    data={weatherData?.forecast?.forecastday[0]?.hour[0].temp_c == undefined ? null : chartData}
+                    labels = 'temp in de'
+                    options = {options}
+                    />
+                </div>
+            )}
         </div>
+        </>
     )
 }
 

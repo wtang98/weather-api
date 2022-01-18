@@ -8,7 +8,6 @@ const Home = () => {
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
     const [location, setLocation] = useState(latitude,longitude)
-    const [background, setBackground] = useState('')
     
     //fetching Data
     useEffect(() => {
@@ -30,34 +29,17 @@ const Home = () => {
             .catch(error => console.log(error))
 	}, [latitude,longitude])
 
-    let condition = weatherData?.current?.condition?.text;
-    const loadBackground = () => {
-        if(condition === 'Sunny'){
-            setBackground('sunny')
-        }
-        if(condition === 'Rainy'){
-            setBackground('rainy')
-        }
-        if(condition === 'Clear'){
-            setBackground('clear')
-        }
-        if(condition === ''){
-            setBackground('rainy')
-        }
-        if(condition === 'Fog'){
-            setBackground('fog')
-        }
-    }
-    useEffect(loadBackground, [condition])
-    console.log(background)
+
 
     return (
         <>
-            {background != undefined && <div className={`home ${background}`}>
+            <div className='home'>
                 <h1>Weather Forecast</h1>
-                <Result weatherData={weatherData}/>
-                <MyCharts weatherData={weatherData}/>
-            </div>}
+                <div className="home__info">
+                    <Result weatherData={weatherData}/>
+                    <MyCharts weatherData={weatherData}/>
+                </div>
+            </div>
         </>
     )
 }

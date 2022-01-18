@@ -15,29 +15,15 @@
     flex-direction: column;
     min-height: 100vh;
     background-size: cover;
+    background-color:  rgba(0, 0, 0, 0.857);
+    &__info{
+        border-radius: 10px;
+        padding: 10px;
+        background-color:  rgba(0, 0, 0, 0.837);
 
-    background-size: cover;
-
-    background-size: cover;
-
-    background-size: cover;
+    }
     &>h1{
         margin-bottom: 10px;
+        color: white;
     }
-}
-
-.rainy{
-    background-image: url('../assets/media/rainy.gif');
-}
-.cloudy{
-    background-image: url('../assets/media/cloudy.gif');
-}
-.clear{
-    background-image: url('../assets/media/clear.gif');
-}
-.sunny{
-    background-image: url('../assets/media/sunny.gif');
-}
-.fog{
-    background-image: url('../assets/media/fog.gif');
 }
