@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/weather-api/static/css/main.e5408f1e.css",
+    "main.js": "/weather-api/static/js/main.09b2a808.js",
+    "static/js/787.822bebed.chunk.js": "/weather-api/static/js/787.822bebed.chunk.js",
+    "static/media/cloudy.gif": "/weather-api/static/media/cloudy.196ae4cbe8f4a9b43625.gif",
+    "static/media/sunny.gif": "/weather-api/static/media/sunny.cdb93596fa5b430db63a.gif",
+    "static/media/rainy.gif": "/weather-api/static/media/rainy.00ca1f3c6638169cb939.gif",
+    "static/media/snow.gif": "/weather-api/static/media/snow.4085477816cc39884fa6.gif",
+    "static/media/clear.gif": "/weather-api/static/media/clear.1876db2a68d95d1d4fb0.gif",
+    "static/media/thunder.gif": "/weather-api/static/media/thunder.6c97d40ed142ff9c0ca6.gif",
+    "static/media/fog.gif": "/weather-api/static/media/fog.2e8d76f4d356fb7def08.gif",
+    "index.html": "/weather-api/index.html",
+    "main.e5408f1e.css.map": "/weather-api/static/css/main.e5408f1e.css.map",
+    "main.09b2a808.js.map": "/weather-api/static/js/main.09b2a808.js.map",
+    "787.822bebed.chunk.js.map": "/weather-api/static/js/787.822bebed.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e5408f1e.css",
+    "static/js/main.09b2a808.js"
+  ]
+}
