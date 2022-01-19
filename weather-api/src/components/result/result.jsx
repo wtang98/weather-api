@@ -3,23 +3,23 @@ import React,{ useEffect, useState }  from 'react'
 import './result.scss'
 import WeatherDetails from './weatherDetails/weatherDetails.jsx';
 import DaysForcast from './daysForcast/daysForcast.jsx'
+import SearchBar from './searchBar/searchBar';
 
 const weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const month = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const Result = ({weatherData, latitude, longitude, handleLat, handleLon}) => {
+const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZone}) => {
     const [clockState, setClockState] = useState();
     const [background, setBackground] = useState(undefined)
     
     let greeting = 'Hello!';
     let airQuality = '';
     let uvRating = '';
-    let windDirection = ''
     const currentData = weatherData?.current;
     const foreCast = weatherData?.forecast;
     
     const date = new Date()
-    const hours = date.getHours();
+    const hours = new Date().getHours();
     const day = date.getDate();
     const monthOfYear = month[date.getMonth()]
     
@@ -74,15 +74,15 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon}) => {
                 arrOfDiretions[i] = 'East'
             }
         }
-    direction = arrOfDiretions.join(' ')
+        direction = arrOfDiretions.join(' ')
     }
 
     useEffect(() => {
         setInterval(() => {
             const datee = new Date()
-            setClockState(datee.toLocaleTimeString())
+            setClockState(datee.toLocaleTimeString('en-UK',{timeZone: timeZone}))
         },1000)
-    }, [])
+    }, [timeZone])
 
     let condition = weatherData?.current?.condition?.text;
     // const condition = 'Light snow'
@@ -118,9 +118,12 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon}) => {
                 </div>
             ):(
             <div className='result'>
-                <h1>Weather Forecast</h1>
-                <h2>{date.getHours() < 12? `${clockState}am`: `${clockState}pm`}</h2>
-                <h3>{greeting} Here is the weather at {weatherData?.location?.region}</h3>
+                <header className="result__header">
+                    <h1>Weather Forecast</h1>
+                    {latitude !== '' && longitude !== '' && <SearchBar latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>}
+                </header>
+                <h2>{date.getHours() < 12? `${clockState}am`: `${clockState}`}</h2>
+                <h3>{greeting}</h3>
                 <div className='result__info'>
                     {background !== undefined && <div className={`result__info-left ${background}`}>
                         <div className='result__info-left-top'>

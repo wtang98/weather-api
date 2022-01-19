@@ -8,7 +8,12 @@
     border-radius: 15px;
     width: 100%;
     color: white;
-        font-family: inherit;
+    font-family: inherit;
+        &__header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         &__info{
         color: rgb(28, 28, 28);
         // background-color:  rgba(0, 0, 0, 0.837);

@@ -1,6 +1,26 @@
 .container{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+
+}
+.autocomplete-dropdown-container{
+    background-color: darkgrey;
+    color: white;
+    position: fixed;
+}
+.location-search-input{
+    color: white;
+    width: 200px;
+    height: 15px;
+    padding: 7px;
+    border: none;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 15px;
+    &:focus{
+        text-decoration: none;
+        color: black;
+        background-color: white;
+        border: 1px solid black;
+    }
 }

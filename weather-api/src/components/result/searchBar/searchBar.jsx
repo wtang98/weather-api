@@ -46,7 +46,7 @@ export class MapContainer extends Component {
                     <div>
                         <input
                         {...getInputProps({
-                            placeholder: 'Search Places ...',
+                            placeholder: 'Click Here to search',
                             className: 'location-search-input',
                         })}
                         />
@@ -58,8 +58,8 @@ export class MapContainer extends Component {
                                 : 'suggestion-item';
                                 // inline style for demonstration purpose
                                 const style = suggestion.active
-                                ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                ? { backgroundColor: 'black', cursor: 'pointer', width:200, padding:7}
+                                : { backgroundColor: 'black', cursor: 'pointer', width:200, padding:7};
                                 return (
                                 <div
                                     {...getSuggestionItemProps(suggestion, {

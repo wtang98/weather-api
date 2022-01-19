@@ -8,8 +8,15 @@ const Home = () => {
     const [weatherData, setWeatherData] = useState(false)
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
-    console.log(latitude, longitude, 'here')
+    const [timeZ, setTimeZ] = useState('')
     
+    const handleLat = (lat) =>{
+        setLatitude(lat)
+    }
+    const handleLon = (lon) =>{
+        setLongitude(lon)
+    }
+
     //fetching Data
     useEffect(() => {
         if('geolocation' in navigator){
@@ -21,30 +28,26 @@ const Home = () => {
             alert('location not found')
         }
     },[])
-    const handleLat = (lat) =>{
-        setLatitude(lat)
-    }
-    const handleLon = (lon) =>{
-        setLongitude(lon)
-    }
 
 	useEffect(() => {
 		fetch(`http://api.weatherapi.com/v1/forecast.json?key=a97287063e5247b88a4123535221301&q=${latitude} ${longitude}&days=10&aqi=yes&alerts=yes`)
             .then(response => response.json())
             .then(data =>  setWeatherData(data))
             .catch(error => console.log(error))
-	}, [latitude,longitude])
+	}, [longitude])
+
+    const timeZone = weatherData?.location?.tz_id;
 
     return (
         <>
             <div className='home'>
                 <div className="home__info">
-                    <Result weatherData={weatherData} latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>
+                    <Result weatherData={weatherData} latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon} timeZone={timeZone}/>
                     <MyCharts weatherData={weatherData}/>
                 </div>
-                <div className="home__map">
-                    {latitude !== '' && longitude !== '' && <GoogleMaps latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>}
-                </div>
+                {/* <div className="home__map"> */}
+                    {/* {latitude !== '' && longitude !== '' && <GoogleMaps latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>} */}
+                {/* </div> */}
             </div>
         </>
     )

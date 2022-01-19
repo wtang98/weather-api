@@ -14,8 +14,6 @@ const MyCharts = ({weatherData}) => {
     const [timesData, setTimesData] = useState([]);
     const [tempData, setTempData] = useState([]);
     const [feelsLikeData, setFeelsLikeData] = useState([])
-    const [rainfallData, setRainfallData] = useState([])
-
 
     let chartData = {
         labels: timesData,
@@ -36,7 +34,6 @@ const MyCharts = ({weatherData}) => {
         let times = [];
         let temps = [];
         let feelsLike = [];
-        let rainFall = [];
         for(let i = 0; i<24 ;i++){
             if(i<12){
                 if(i<10){
@@ -49,17 +46,16 @@ const MyCharts = ({weatherData}) => {
             }
             temps.push(weatherData?.forecast?.forecastday[0]?.hour[i].temp_c);
             feelsLike.push(weatherData?.forecast?.forecastday[0]?.hour[i].feelslike_c);
-            rainFall.push(weatherData?.forecast?.forecastday[0]?.hour[i].precip_mm)
         }
         setTimesData(times)
         setTempData(temps)
         setFeelsLikeData(feelsLike)
-        setRainfallData(rainFall)
     }
     const options = {
         display:true,
         responsive: true,
         maintainAspectRatio: true,
+        // innerHeight:200,
         title:{
             display: true,
             text: 'Temperature through the day'
@@ -82,9 +78,9 @@ const MyCharts = ({weatherData}) => {
                 <div className='chart__container'>
                     <h2>Temperature through the day</h2>
                     <Line 
-                    data={weatherData?.forecast?.forecastday[0]?.hour[0].temp_c == undefined ? null : chartData}
-                    labels = 'temp in de'
-                    options = {options}
+                        data={weatherData?.forecast?.forecastday[0]?.hour[0].temp_c == undefined ? null : chartData}
+                        labels = 'temp in de'
+                        options = {options}
                     />
                 </div>
             )}
