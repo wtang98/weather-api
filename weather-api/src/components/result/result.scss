@@ -15,8 +15,8 @@
             align-items: center;
         }
         &__info{
-        color: rgb(28, 28, 28);
-        // background-color:  rgba(0, 0, 0, 0.837);
+        // color: rgb(28, 28, 28);
+        color: lightgoldenrodyellow;
         font-family: inherit;
         border-radius: 15px;
         display: flex;
@@ -26,7 +26,6 @@
             background-size: cover;
             padding: 10px;
             font-family: inherit;
-            // background-color:  rgb(1, 1, 55);
             border-radius: 15px;
             display: flex;
             flex-direction: column;

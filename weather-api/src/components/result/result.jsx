@@ -59,12 +59,12 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
 
     const windDir = currentData?.wind_dir
     
-    let arrOfDiretions = '';
+    let arrOfDiretions = [];
     let direction = ''
     if(windDir !== undefined){
         arrOfDiretions = windDir.split('')
         for(let i = 0; i< arrOfDiretions.length;i++){
-            if(arrOfDiretions[i]== 'S'){
+            if(arrOfDiretions[i]=== 'S'){
                 arrOfDiretions[i] = 'South'
             }else if(arrOfDiretions[i]==='W'){
                 arrOfDiretions[i] = 'West'
@@ -80,9 +80,9 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
     useEffect(() => {
         setInterval(() => {
             const datee = new Date()
-            setClockState(datee.toLocaleTimeString('en-UK',{timeZone: timeZone}))
-        },1000)
-    }, [timeZone])
+            setClockState(datee.toLocaleTimeString('en-UK'))
+        })
+    }, [])
 
     let condition = weatherData?.current?.condition?.text;
     // const condition = 'Light snow'
