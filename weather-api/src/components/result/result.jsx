@@ -112,10 +112,8 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
     
     return (
         <>
-            {currentData?.feelslike_c === undefined ?(
-                <div className="loadingScreen">
-                    <p>loading...</p>
-                </div>
+            {currentData?.feelslike_c === undefined ? (
+                <div className="loadingScreen"></div>
             ):(
             <div className='result'>
                 <header className="result__header">

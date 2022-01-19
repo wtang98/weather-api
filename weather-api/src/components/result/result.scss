@@ -10,6 +10,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('../../assets/media/loading.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    // background-size: cover;
 }
 @media only screen and (min-width: 1112px){
     .loadingScreen{
