@@ -22,6 +22,15 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
     const hours = new Date().getHours();
     const day = date.getDate();
     const monthOfYear = month[date.getMonth()]
+    const altTime = date.toLocaleTimeString('en-UK', {timeZone: timeZone})
+    const altTimeHours = altTime.split(":")[1];
+
+    useEffect(() => {
+        setInterval(() => {
+            const datee = new Date()
+            setClockState(datee.toLocaleTimeString('en-UK'))
+        },0)
+    }, [timeZone])
     
     if(5 <= hours && hours < 12){
         greeting='Good Morning!'
@@ -77,15 +86,7 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
         direction = arrOfDiretions.join(' ')
     }
 
-    useEffect(() => {
-        setInterval(() => {
-            const datee = new Date()
-            setClockState(datee.toLocaleTimeString('en-UK'))
-        })
-    }, [])
-
     let condition = weatherData?.current?.condition?.text;
-    // const condition = 'Freezing Fog'
     const loadBackground = () => {
         if(condition === 'Sunny'){
             setBackground('sunny')
@@ -109,6 +110,9 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
         }
     }
     useEffect(loadBackground, [condition])
+
+
+
     
     return (
         <>
@@ -120,13 +124,14 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
                     <h1>Weather App</h1>
                     {latitude !== '' && longitude !== '' && <SearchBar latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>}
                 </header>
-                <h2>{date.getHours() < 12? `${clockState}am`: `${clockState}`}</h2>
+                <h2>{hours < 12? `${clockState}am`: `${clockState}pm`}</h2>
                 <h3>{greeting}</h3>
                 <div className='result__info'>
                     {background !== undefined && <div className={`result__info-left ${background}`}>
                         <div className='result__info-left-top'>
-                            <h1 className='dayOfWeek'>{weekday[date.getDay()]}</h1>
+                            <h2 className='dayOfWeek'>{weekday[date.getDay()]}</h2>
                             <h4 className='monthDay'>{day === 1 ? `${day}st ${monthOfYear}`: day === 2?`${day}nd ${monthOfYear}`: day === 3?`${day}rd ${monthOfYear}` : `${day}th ${monthOfYear}`}</h4>
+                            <h4>{altTime}</h4>
                             <div className='result__info-left-top-location'>
                                 <h4>{weatherData?.location?.region}</h4>
                                 <h4>{weatherData?.location?.country}</h4>
