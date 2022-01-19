@@ -7,21 +7,16 @@
 
 .home{
     font-family: $font-primary;
-    // width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
-    background-color:  rgba(0, 0, 0, 0.857);
-    &>h1{
-        margin-bottom: 10px;
-        color: white;
-    }
+    background-color: #041C32;
     &__info{
         border-radius: 10px;
         padding: 10px;
-        background-color:  rgba(0, 0, 0, 0.837);
+        background-color: #04293A;
     }
 }

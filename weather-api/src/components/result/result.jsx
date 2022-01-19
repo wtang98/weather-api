@@ -85,7 +85,6 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
     }, [])
 
     let condition = weatherData?.current?.condition?.text;
-    console.log(condition)
     // const condition = 'Freezing Fog'
     const loadBackground = () => {
         if(condition === 'Sunny'){
@@ -120,7 +119,7 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
             ):(
             <div className='result'>
                 <header className="result__header">
-                    <h1>Weather Forecast</h1>
+                    <h1>Weather App</h1>
                     {latitude !== '' && longitude !== '' && <SearchBar latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>}
                 </header>
                 <h2>{date.getHours() < 12? `${clockState}am`: `${clockState}`}</h2>

@@ -58,8 +58,8 @@ export class MapContainer extends Component {
                                 : 'suggestion-item';
                                 // inline style for demonstration purpose
                                 const style = suggestion.active
-                                ? { backgroundColor: 'black', cursor: 'pointer', width:200, padding:7}
-                                : { backgroundColor: 'black', cursor: 'pointer', width:200, padding:7};
+                                ? { backgroundColor: '#041C32', cursor: 'pointer', width:200, padding:7}
+                                : { backgroundColor: '#041C32', cursor: 'pointer', width:200, padding:7};
                                 return (
                                 <div
                                     {...getSuggestionItemProps(suggestion, {

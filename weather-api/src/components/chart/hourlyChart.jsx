@@ -72,8 +72,7 @@ const MyCharts = ({weatherData}) => {
         <>
         <div className='chart'>
             {weatherData?.forecast?.forecastday[0]?.hour[0].temp_c == undefined ? (
-                <div>loading...</div>
-            
+                <div></div>
             ):(
                 <div className='chart__container'>
                     <h2>Temperature through the day</h2>

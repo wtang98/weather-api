@@ -19,7 +19,7 @@
 .result{
     border-radius: 15px;
     width: 100%;
-    color: white;
+    color: #ECB365;
     font-family: inherit;
         &__header{
             display: flex;
@@ -27,8 +27,7 @@
             align-items: center;
         }
         &__info{
-        // color: rgb(28, 28, 28);
-        color: lightgoldenrodyellow;
+        color: #041C32;
         font-family: inherit;
         border-radius: 15px;
         display: flex;
@@ -48,7 +47,7 @@
             }
         }
         &-right{
-            color: white;
+            color: #ECB365;
             font-family: inherit;
             padding: 10px;
             border-radius: 15px;

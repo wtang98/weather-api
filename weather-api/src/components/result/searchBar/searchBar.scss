@@ -9,18 +9,17 @@
     position: fixed;
 }
 .location-search-input{
-    color: white;
+    color: #ECB365;
     width: 200px;
     height: 15px;
     padding: 7px;
-    border: 1px solid white;
+    border: 1px solid #04293A;
     cursor: pointer;
-    background-color: black;
+    background-color: #041C32;
     border-radius: 15px;
     &:focus{
-        text-decoration: none;
-        color: black;
-        background-color: white;
-        border: 1px solid black;
+        color: #041C32;
+        background-color: #ECB365;
+        border: none;
     }
 }

@@ -45,9 +45,6 @@ const Home = () => {
                     <Result weatherData={weatherData} latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon} timeZone={timeZone}/>
                     <MyCharts weatherData={weatherData}/>
                 </div>
-                {/* <div className="home__map"> */}
-                    {/* {latitude !== '' && longitude !== '' && <GoogleMaps latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>} */}
-                {/* </div> */}
             </div>
         </>
     )
