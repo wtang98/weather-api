@@ -30,14 +30,13 @@ const MyCharts = ({weatherData}) => {
                 data: feelsLikeData,
                 borderColor:"grey",
             },
-            {
-                label: 'Rain Fall',
-                data: rainfallData,
-                borderColor:"blue",
-            }
+            // {
+            //     label: 'Rain Fall',
+            //     data: rainfallData,
+            //     borderColor:"blue",
+            // }
         ],
     }
-    
     const loadChartData = () => {
         let times = [];
         let temps = [];

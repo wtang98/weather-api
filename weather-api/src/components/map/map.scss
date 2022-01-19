@@ -1,11 +1,6 @@
 .container{
-    border: solid 1px red;
     display: flex;
-    flex-direction: row;
-    &__map{
-        &>Map{
-            width: 60vw;
-            height: 60vh;
-        }
-    }
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -3,12 +3,13 @@ import './home.scss'
 import Result from '../components/result/result'
 import MyCharts from '../components/chart/hourlyChart'
 import GoogleMaps from '../components/map/map'
+import Nav from '../components/nav/nav'
 
 const Home = () => {
     const [weatherData, setWeatherData] = useState(false)
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
-    // const [location, setLocation] = useState(latitude,longitude)
+    console.log(latitude, longitude, 'here')
     
     //fetching Data
     useEffect(() => {
@@ -35,18 +36,16 @@ const Home = () => {
             .catch(error => console.log(error))
 	}, [latitude,longitude])
 
-
-
     return (
         <>
+            <Nav title={'click'}/>
             <div className='home'>
-                <h1>Weather Forecast</h1>
                 <div className="home__info">
                     <Result weatherData={weatherData}/>
                     <MyCharts weatherData={weatherData}/>
                 </div>
                 <div className="home__map">
-                    <GoogleMaps latitude={latitude} longitude={longitude}/>
+                    {latitude !== '' && longitude !== '' && <GoogleMaps latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>}
                 </div>
             </div>
         </>

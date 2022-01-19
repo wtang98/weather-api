@@ -3,6 +3,7 @@ import React,{ useEffect, useState }  from 'react'
 import './result.scss'
 import WeatherDetails from './weatherDetails/weatherDetails.jsx';
 import DaysForcast from './daysForcast/daysForcast.jsx'
+import Nav from '../nav/nav';
 
 const weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const month = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -25,7 +26,7 @@ const Result = ({weatherData}) => {
     
     if(5 <= hours && hours < 12){
         greeting='Good Morning!'
-    }else if(hours == 12){
+    }else if(hours === 12){
         greeting='Its noon!'
     }else if(12 <= hours && hours < 19){
         greeting='Good Afternoon!'
@@ -61,16 +62,16 @@ const Result = ({weatherData}) => {
     
     let arrOfDiretions = '';
     let direction = ''
-    if(windDir != undefined){
+    if(windDir !== undefined){
         arrOfDiretions = windDir.split('')
         for(let i = 0; i< arrOfDiretions.length;i++){
             if(arrOfDiretions[i]== 'S'){
                 arrOfDiretions[i] = 'South'
-            }else if(arrOfDiretions[i]=='W'){
+            }else if(arrOfDiretions[i]==='W'){
                 arrOfDiretions[i] = 'West'
-            }else if(arrOfDiretions[i]=='N'){
+            }else if(arrOfDiretions[i]==='N'){
                 arrOfDiretions[i] = 'North'
-            }else if(arrOfDiretions[i]=='E'){
+            }else if(arrOfDiretions[i]==='E'){
                 arrOfDiretions[i] = 'East'
             }
         }
@@ -84,27 +85,27 @@ const Result = ({weatherData}) => {
         },1000)
     }, [])
 
-    // let condition = weatherData?.current?.condition?.text;
-    const condition = 'Sunny'
+    let condition = weatherData?.current?.condition?.text;
+    // const condition = 'Light snow'
     const loadBackground = () => {
         if(condition === 'Sunny'){
             setBackground('sunny')
-        }else if(condition === 'Cloudy' || 'Overcast' ||'Partly cloudy'){
-            setBackground('cloudy')
         }else if(condition === 'Clear'){
             setBackground('clear')
-        }else if(condition === 'Fog'|| 'Freezing Fog'|| 'Mist'){
+        }else if(condition === 'Cloudy' || condition ===  'Overcast' || condition === 'Partly cloudy'){
+            setBackground('cloudy')
+        }else if(condition === 'Fog'|| condition ===  'Freezing Fog'|| condition ===  'Mist'){
             setBackground('fog')
-        }else if(condition === 'Patchy light rain with thunder' || 'Moderate or heavy rain with thunder' || 'Patchy light snow with thunder' 
-        || 'Moderate or heavy snow with thunder'){
+        }else if(condition === 'Patchy light rain with thunder' || condition ===  'Moderate or heavy rain with thunder' || condition ===  'Patchy light snow with thunder' 
+        || condition ===  'Moderate or heavy snow with thunder'){
             setBackground('thunder')
-        }else if(condition === 'Light snow' || 'Patchy snow possible' || 'Patchy light snow' 
-        || 'Patchy moderate snow' || 'Moderate snow' || 'Patchy heavy snow' || 'Heavy snow'){
+        }else if(condition === 'Light snow' || condition ===  'Patchy snow possible' || condition ===  'Patchy light snow' 
+        || condition ===  'Patchy moderate snow' || condition ===  'Moderate snow' || condition ===  'Patchy heavy snow' || condition ===  'Heavy snow'){
             setBackground('snow')
-        }else if(condition === 'Rain'|| 'Rainy','Patchy rain possible'||'Patchy light drizzle'||'Light drizzle'
-            ||'Patchy light rain'|| 'Light rain'||'Moderate rain at times'||'Moderate rain' 
-            ||'Heavy rain at times'||'Heavy rain'||'Light freezing rain'||'Moderate or heavy freezing rain' 
-            ||'Light rain shower'||'Moderate or heavy rain shower'||'Torrential rain shower'){
+        }else if(condition === 'Rain'|| condition ===  'Rainy','Patchy rain possible'|| condition === 'Patchy light drizzle'|| condition === 'Light drizzle'
+            || condition === 'Patchy light rain'|| condition ===  'Light rain'|| condition === 'Moderate rain at times'|| condition === 'Moderate rain' 
+            || condition === 'Heavy rain at times'|| condition === 'Heavy rain'|| condition === 'Light freezing rain'|| condition === 'Moderate or heavy freezing rain' 
+            || condition === 'Light rain shower'|| condition === 'Moderate or heavy rain shower'|| condition === 'Torrential rain shower'){
             setBackground('rainy')
         }
     }
@@ -112,7 +113,7 @@ const Result = ({weatherData}) => {
     
     return (
         <>
-            {currentData?.feelslike_c == undefined ?(
+            {currentData?.feelslike_c === undefined ?(
                 <div className="loadingScreen">
                     loading...
                 </div>
@@ -121,10 +122,10 @@ const Result = ({weatherData}) => {
                 <h2>{date.getHours() < 12? `${clockState}am`: `${clockState}pm`}</h2>
                 <h2>{greeting} Here is the weather were you are</h2>
                 <div className='result__info'>
-                    {background != undefined && <div className={`result__info-left ${background}`}>
+                    {background !== undefined && <div className={`result__info-left ${background}`}>
                         <div className='result__info-left-top'>
                             <h1 className='dayOfWeek'>{weekday[date.getDay()]}</h1>
-                            <h4 className='monthDay'>{day == 1 ? `${day}st ${monthOfYear}`: day == 2?`${day}nd ${monthOfYear}`: day == 3?`${day}rd ${monthOfYear}` : `${day}th ${monthOfYear}`}</h4>
+                            <h4 className='monthDay'>{day === 1 ? `${day}st ${monthOfYear}`: day === 2?`${day}nd ${monthOfYear}`: day === 3?`${day}rd ${monthOfYear}` : `${day}th ${monthOfYear}`}</h4>
                             <div className='result__info-left-top-location'>
                                 <h4>{weatherData?.location?.region}</h4>
                                 <h4>{weatherData?.location?.country}</h4>
