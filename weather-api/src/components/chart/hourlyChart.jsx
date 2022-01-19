@@ -29,12 +29,7 @@ const MyCharts = ({weatherData}) => {
                 label: 'Feels Like',
                 data: feelsLikeData,
                 borderColor:"grey",
-            },
-            // {
-            //     label: 'Rain Fall',
-            //     data: rainfallData,
-            //     borderColor:"blue",
-            // }
+            }
         ],
     }
     const loadChartData = () => {

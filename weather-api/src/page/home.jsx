@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './home.scss'
 import Result from '../components/result/result'
 import MyCharts from '../components/chart/hourlyChart'
-import GoogleMaps from '../components/map/map'
-import Nav from '../components/nav/nav'
+import GoogleMaps from '../components/result/searchBar/searchBar'
 
 const Home = () => {
     const [weatherData, setWeatherData] = useState(false)
@@ -38,10 +37,9 @@ const Home = () => {
 
     return (
         <>
-            <Nav title={'click'}/>
             <div className='home'>
                 <div className="home__info">
-                    <Result weatherData={weatherData}/>
+                    <Result weatherData={weatherData} latitude={latitude} longitude={longitude} handleLat={handleLat} handleLon={handleLon}/>
                     <MyCharts weatherData={weatherData}/>
                 </div>
                 <div className="home__map">

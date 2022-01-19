@@ -3,12 +3,11 @@ import React,{ useEffect, useState }  from 'react'
 import './result.scss'
 import WeatherDetails from './weatherDetails/weatherDetails.jsx';
 import DaysForcast from './daysForcast/daysForcast.jsx'
-import Nav from '../nav/nav';
 
 const weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const month = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const Result = ({weatherData}) => {
+const Result = ({weatherData, latitude, longitude, handleLat, handleLon}) => {
     const [clockState, setClockState] = useState();
     const [background, setBackground] = useState(undefined)
     
@@ -119,8 +118,9 @@ const Result = ({weatherData}) => {
                 </div>
             ):(
             <div className='result'>
+                <h1>Weather Forecast</h1>
                 <h2>{date.getHours() < 12? `${clockState}am`: `${clockState}pm`}</h2>
-                <h2>{greeting} Here is the weather were you are</h2>
+                <h3>{greeting} Here is the weather at {weatherData?.location?.region}</h3>
                 <div className='result__info'>
                     {background !== undefined && <div className={`result__info-left ${background}`}>
                         <div className='result__info-left-top'>
