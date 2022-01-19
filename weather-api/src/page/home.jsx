@@ -30,7 +30,7 @@ const Home = () => {
     },[])
 
 	useEffect(() => {
-		fetch(`http://api.weatherapi.com/v1/forecast.json?key=a97287063e5247b88a4123535221301&q=${latitude} ${longitude}&days=10&aqi=yes&alerts=yes`)
+		fetch(`https://api.weatherapi.com/v1/forecast.json?key=a97287063e5247b88a4123535221301&q=${latitude} ${longitude}&days=10&aqi=yes&alerts=yes`)
             .then(response => response.json())
             .then(data =>  setWeatherData(data))
             .catch(error => console.log(error))

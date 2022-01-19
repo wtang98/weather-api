@@ -85,7 +85,8 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
     }, [])
 
     let condition = weatherData?.current?.condition?.text;
-    // const condition = 'Light snow'
+    console.log(condition)
+    // const condition = 'Freezing Fog'
     const loadBackground = () => {
         if(condition === 'Sunny'){
             setBackground('sunny')
@@ -93,7 +94,7 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
             setBackground('clear')
         }else if(condition === 'Cloudy' || condition ===  'Overcast' || condition === 'Partly cloudy'){
             setBackground('cloudy')
-        }else if(condition === 'Fog'|| condition ===  'Freezing Fog'|| condition ===  'Mist'){
+        }else if(condition === 'Fog'|| condition === 'Freezing fog'|| condition === 'Mist'){
             setBackground('fog')
         }else if(condition === 'Patchy light rain with thunder' || condition ===  'Moderate or heavy rain with thunder' || condition ===  'Patchy light snow with thunder' 
         || condition ===  'Moderate or heavy snow with thunder'){
@@ -114,7 +115,7 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
         <>
             {currentData?.feelslike_c === undefined ?(
                 <div className="loadingScreen">
-                    loading...
+                    <p>loading...</p>
                 </div>
             ):(
             <div className='result'>

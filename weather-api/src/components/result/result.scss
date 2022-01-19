@@ -4,6 +4,18 @@
     padding: 0;
 }
 
+.loadingScreen{
+    width: 70vw;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (min-width: 1112px){
+    .loadingScreen{
+        width: 40vw;
+    }
+}
 .result{
     border-radius: 15px;
     width: 100%;
