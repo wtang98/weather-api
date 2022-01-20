@@ -52,7 +52,7 @@ const MyCharts = ({weatherData}) => {
         setFeelsLikeData(feelsLike)
     }
     const options = {
-        display:true,
+        display: true,
         responsive: true,
         maintainAspectRatio: true,
         // innerHeight:200,
@@ -61,7 +61,9 @@ const MyCharts = ({weatherData}) => {
             text: 'Temperature through the day'
         },
         legend: {
+            display: true,
             labels: {
+                display: true,
                 fontSize: 26
             }
         }
