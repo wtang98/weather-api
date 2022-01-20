@@ -4,6 +4,30 @@
     border-radius: 15px;
     color: #ECB365;
     background-color: #04293A;
+    &__container{
+        &-legend{
+            &-real{
+                display: flex;
+                align-items: center;
+                &>div{
+                    margin-left: 5px;
+                    width: 10px;
+                    height: 10px;
+                    background-color: darkblue;
+                }
+            }
+            &-feels{
+                display: flex;
+                align-items: center;
+                &>div{
+                    margin-left: 5px;
+                    width: 10px;
+                    height: 10px;
+                    background-color: grey;
+                }
+            }
+        }
+    }
 }
 @media only screen and (min-width: 1112px){
     .chart{

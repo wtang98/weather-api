@@ -15,7 +15,7 @@ const MyCharts = ({weatherData}) => {
     const [tempData, setTempData] = useState([]);
     const [feelsLikeData, setFeelsLikeData] = useState([])
 
-    let chartData = {
+    const chartData = {
         labels: timesData,
         datasets: [
             {
@@ -78,9 +78,20 @@ const MyCharts = ({weatherData}) => {
             ):(
                 <div className='chart__container'>
                     <h2>Temperature through the day</h2>
+                    <div className='chart__container-legend'>
+                        <div className='chart__container-legend-real'>
+                            <p>Real Temp °C</p>
+                            <div></div>
+                        </div>
+                        <div className='chart__container-legend-feels'>
+                            <p>Feels Like °C</p>
+                            <div></div>
+                        </div>
+
+                    </div>
                     <Line 
                         data={weatherData?.forecast?.forecastday[0]?.hour[0].temp_c == undefined ? null : chartData}
-                        labels = 'temp in de'
+                        labels = ''
                         options = {options}
                     />
                 </div>
