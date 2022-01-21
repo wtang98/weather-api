@@ -23,7 +23,6 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
     const day = date.getDate();
     const monthOfYear = month[date.getMonth()]
     const altTime = date.toLocaleTimeString('en-UK', {timeZone: timeZone})
-    const altTimeHours = altTime.split(":")[1];
 
     useEffect(() => {
         setInterval(() => {

@@ -8,7 +8,6 @@ const Home = () => {
     const [weatherData, setWeatherData] = useState(false)
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
-    const [timeZ, setTimeZ] = useState('')
     
     const handleLat = (lat) =>{
         setLatitude(lat)
