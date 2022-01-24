@@ -6,8 +6,8 @@ import GoogleMaps from '../components/result/searchBar/searchBar'
 
 const Home = () => {
     const [weatherData, setWeatherData] = useState(false)
-    const [latitude, setLatitude] = useState('')
-    const [longitude, setLongitude] = useState('')
+    const [latitude, setLatitude] = useState('51.5072')
+    const [longitude, setLongitude] = useState(' 0.1276')
     
     const handleLat = (lat) =>{
         setLatitude(lat)

@@ -34,7 +34,7 @@ const Result = ({weatherData, latitude, longitude, handleLat, handleLon, timeZon
     if(5 <= hours && hours < 12){
         greeting='Good Morning!'
     }else if(hours === 12){
-        greeting='Its noon!'
+        greeting='Its Noon!'
     }else if(12 <= hours && hours < 19){
         greeting='Good Afternoon!'
     }else if(19 <= hours && hours <= 24 && hours < 5){
